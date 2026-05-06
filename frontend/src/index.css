@@ -1,43 +1,142 @@
-/* Tailwind layers */
+/* ================================================================
+   index.css — CARDSHIELD
+   Tailwind directives + global resets + custom utilities
+   ================================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Space+Mono:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap');
+/* ── Base resets ─────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
-/* Base */
-*, *::before, *::after { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
-  background: #07090f;
-  color: #e2e8f0;
-  font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  padding: 0;
+  background-color: #050c1a;
+  color: #c8daf0;
+  font-family: 'Space Mono', ui-monospace, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Thin indigo scrollbar */
-::-webkit-scrollbar       { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
+/* ── Custom scrollbar ────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050c1a;
+}
+
 ::-webkit-scrollbar-thumb {
-  background: rgba(99,102,241,.35);
+  background: #1e2d4a;
   border-radius: 999px;
 }
-::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,.55); }
 
-/* Remove number input arrows */
-.no-spin::-webkit-inner-spin-button,
-.no-spin::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-.no-spin { -moz-appearance: textfield; }
-
-/* Reusable glass card */
-@layer components {
-  .glass {
-    @apply rounded-2xl border border-white/[0.08] bg-white/[0.04]
-           backdrop-blur-xl shadow-2xl shadow-black/40;
+::-webkit-scrollbar-thumb:hover {
+  background: #2a4070;
 }
+
+/* ── Remove number input spinners ────────────────────────────── */
+.no-spin::-webkit-inner-spin-button,
+.no-spin::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spin {
+  -moz-appearance: textfield;
+}
+
+/* ── Selection highlight ─────────────────────────────────────── */
+::selection {
+  background: rgba(59, 130, 246, 0.30);
+  color: #e0eeff;
+}
+
+/* ── Focus ring override ─────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ── Keyframe animations ─────────────────────────────────────── */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes expandBar {
+  from { width: 0; }
+}
+
+@keyframes shieldPulse {
+  0%, 100% { opacity: 0.7; transform: scale(1);    }
+  50%      { opacity: 1.0; transform: scale(1.06); }
+}
+
+@keyframes scanline {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(400%);  }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Utility: tab active glow ────────────────────────────────── */
+.tab-active-glow {
+  box-shadow:
+    0 0 20px rgba(59, 130, 246, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* ── Utility: glass card ─────────────────────────────────────── */
+.glass-card {
+  background: rgba(11, 17, 32, 0.80);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid #1e2d4a;
+  border-radius: 1rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.60);
+}
+
+/* ── Utility: gradient text ──────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #60a5fa 0%, #818cf8 50%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Utility: animate on mount ───────────────────────────────── */
+.rise-in {
+  animation: riseIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Code / mono elements ────────────────────────────────────── */
+code {
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 0.85em;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.1em 0.45em;
+  border-radius: 4px;
+  color: #7a9cc5;
 }
