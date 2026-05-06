@@ -1,142 +1,798 @@
 /* ================================================================
-   index.css — CARDSHIELD
-   Tailwind directives + global resets + custom utilities
+   index.css — CARDSHIELD Premium Dark Theme
+   Font: Syne (display) + IBM Plex Mono (mono) + Inter (body)
    ================================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800;900&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Mono:wght@400;600&family=DM+Sans:wght@400;500;600&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* ── Reset & base ─────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── Base resets ─────────────────────────────────────────────── */
-*, *::before, *::after {
-  box-sizing: border-box;
+:root {
+  --navy:        #060b18;
+  --navy-2:      #0a1121;
+  --navy-3:      #0e1729;
+  --border:      rgba(255,255,255,0.07);
+  --border-md:   rgba(255,255,255,0.12);
+  --text-1:      #e8edf8;
+  --text-2:      #8b9cbd;
+  --text-3:      #4a5a78;
+  --indigo:      #6366f1;
+  --indigo-2:    #818cf8;
+  --indigo-glow: rgba(99,102,241,0.18);
+  --emerald:     #10b981;
+  --emerald-2:   #34d399;
+  --emerald-glow:rgba(16,185,129,0.15);
+  --red:         #ef4444;
+  --red-2:       #f87171;
+  --red-glow:    rgba(239,68,68,0.15);
+  --gold:        #f59e0b;
+  --gold-2:      #fbbf24;
+  --violet:      #8b5cf6;
+  --sky:         #0ea5e9;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
+  --radius-xl:   24px;
+  --shadow-card: 0 4px 32px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.04) inset;
+  --shadow-btn:  0 4px 20px rgba(99,102,241,0.35);
+  --transition:  all 0.22s cubic-bezier(0.4,0,0.2,1);
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #050c1a;
-  color: #c8daf0;
-  font-family: 'Space Mono', ui-monospace, monospace;
+  background-color: var(--navy);
+  color: var(--text-1);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
-/* ── Custom scrollbar ────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+code {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85em;
+  background: rgba(255,255,255,0.06);
+  padding: 0.1em 0.5em;
+  border-radius: 4px;
+  color: var(--indigo-2);
 }
 
-::-webkit-scrollbar-track {
-  background: #050c1a;
-}
+/* ── Scrollbar ────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--navy-2); }
+::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(99,102,241,0.5); }
 
-::-webkit-scrollbar-thumb {
-  background: #1e2d4a;
-  border-radius: 999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #2a4070;
-}
-
-/* ── Remove number input spinners ────────────────────────────── */
+/* ── Utility ──────────────────────────────────────── */
+.hidden { display: none !important; }
+.cs-mb-4 { margin-bottom: 1rem; }
+.cs-mt-3 { margin-top: 0.75rem; }
+.cs-text-center { text-align: center; }
+.cs-overflow-x { overflow-x: auto; }
 .no-spin::-webkit-inner-spin-button,
-.no-spin::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.no-spin::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+/* ── Root Shell ───────────────────────────────────── */
+.cs-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.no-spin {
+/* ================================================================
+   HERO
+   ================================================================ */
+.cs-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 3.5rem 1.5rem 2.5rem;
+  background: linear-gradient(160deg, #090f20 0%, #060b18 60%, #0a0c1a 100%);
+  border-bottom: 1px solid var(--border);
+}
+
+.cs-hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% -10%, rgba(99,102,241,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 110%, rgba(139,92,246,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 50% 50%, rgba(16,185,129,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.cs-hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(129,140,248,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(129,140,248,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+
+.cs-hero-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  pointer-events: none;
+}
+.cs-hero-glow--1 {
+  width: 500px; height: 500px;
+  top: -20%; left: -5%;
+  background: rgba(99,102,241,0.08);
+}
+.cs-hero-glow--2 {
+  width: 400px; height: 400px;
+  bottom: -30%; right: -5%;
+  background: rgba(16,185,129,0.06);
+}
+
+.cs-hero-inner {
+  position: relative;
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Badge */
+.cs-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 1rem;
+  border-radius: 99px;
+  background: rgba(16,185,129,0.1);
+  border: 1px solid rgba(16,185,129,0.25);
+  color: var(--emerald-2);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  width: fit-content;
+}
+.cs-hero-badge-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--emerald);
+  animation: pulse 2s infinite;
+}
+
+/* Wordmark */
+.cs-wordmark-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.cs-wordmark-shield {
+  font-size: 3rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 24px rgba(99,102,241,0.6));
+}
+.cs-wordmark {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.8rem, 7vw, 4.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display: flex;
+  gap: 0.08em;
+}
+.cs-wordmark-card { color: var(--text-1); }
+.cs-wordmark-shield-text {
+  color: var(--gold);
+  text-shadow: 0 0 40px rgba(245,158,11,0.5);
+}
+.cs-tagline {
+  color: var(--text-2);
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+  letter-spacing: 0.01em;
+}
+
+/* Hero Stats */
+.cs-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.cs-hero-stat {
+  background: rgba(255,255,255,0.025);
+  padding: 1.1rem 1.25rem;
+  text-align: center;
+  transition: background 0.2s;
+}
+.cs-hero-stat:hover { background: rgba(255,255,255,0.045); }
+.cs-hero-stat-val {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--gold-2);
+  letter-spacing: -0.02em;
+}
+.cs-hero-stat-label {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: var(--text-3);
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+  font-weight: 600;
+}
+
+/* ================================================================
+   NAV / TABS
+   ================================================================ */
+.cs-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(6,11,24,0.88);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.cs-nav-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0.75rem 1.5rem;
+}
+.cs-tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.cs-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  flex: 1;
+  color: var(--text-2);
+}
+.cs-tab:hover {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-1);
+  border-color: var(--border);
+}
+.cs-tab--active {
+  background: rgba(99,102,241,0.12);
+  border-color: rgba(99,102,241,0.3);
+  color: var(--text-1);
+}
+.cs-tab-icon { font-size: 1.2rem; line-height: 1; }
+.cs-tab-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.cs-tab-label {
+  font-size: 0.825rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.cs-tab-sub {
+  font-size: 0.7rem;
+  color: var(--text-3);
+  line-height: 1;
+  margin-top: 2px;
+}
+.cs-tab--active .cs-tab-sub { color: rgba(129,140,248,0.7); }
+.cs-tab-indicator {
+  position: absolute;
+  bottom: -1px; left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--indigo), transparent);
+  border-radius: 2px;
+}
+
+/* ================================================================
+   MAIN CONTENT
+   ================================================================ */
+.cs-main {
+  flex: 1;
+  max-width: 780px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+
+.cs-tab-content { display: flex; flex-direction: column; gap: 1.25rem; }
+
+/* ================================================================
+   CARDS
+   ================================================================ */
+.cs-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.025);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-card);
+}
+.cs-card-padded { padding: 1.5rem; }
+.cs-card-overflow { overflow: hidden; }
+
+/* ================================================================
+   SECTION LABEL
+   ================================================================ */
+.cs-section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+/* ================================================================
+   FORM FIELDS
+   ================================================================ */
+.cs-field-group { display: flex; flex-direction: column; }
+.cs-field-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 10px;
+  color: var(--text-3);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+.cs-field-label--large {
+  font-size: 12px;
+  color: var(--text-2);
+}
+.cs-input {
+  width: 100%;
+  padding: 0.45rem 0.65rem;
+  font-size: 11px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  color: var(--text-1);
+  font-family: 'IBM Plex Mono', monospace;
+  transition: var(--transition);
+  appearance: none;
   -moz-appearance: textfield;
 }
-
-/* ── Selection highlight ─────────────────────────────────────── */
-::selection {
-  background: rgba(59, 130, 246, 0.30);
-  color: #e0eeff;
+.cs-input::-webkit-inner-spin-button,
+.cs-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+.cs-input::placeholder { color: rgba(255,255,255,0.12); }
+.cs-input:focus {
+  outline: none;
+  border-color: rgba(99,102,241,0.5);
+  background: rgba(99,102,241,0.05);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.12);
+}
+.cs-input--large {
+  padding: 0.7rem 0.9rem;
+  font-size: 13px;
 }
 
-/* ── Focus ring override ─────────────────────────────────────── */
-:focus-visible {
-  outline: 2px solid rgba(59, 130, 246, 0.5);
-  outline-offset: 2px;
-  border-radius: 6px;
+.cs-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.cs-hint {
+  font-size: 10px;
+  color: var(--text-3);
+  margin-top: 0.75rem;
+  line-height: 1.6;
 }
 
-/* ── Keyframe animations ─────────────────────────────────────── */
+/* V-field grid */
+.cs-v-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.625rem;
+}
+@media (min-width: 560px) { .cs-v-grid { grid-template-columns: repeat(7, 1fr); } }
+
+/* ================================================================
+   COLLAPSIBLE
+   ================================================================ */
+.cs-collapsible-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-1);
+  transition: background 0.2s;
+}
+.cs-collapsible-btn:hover { background: rgba(255,255,255,0.02); }
+.cs-collapsible-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.cs-chevron {
+  font-size: 10px;
+  color: var(--text-3);
+  transition: transform 0.3s;
+}
+.cs-chevron--open { transform: rotate(180deg); }
+.cs-collapsible-body {
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.3s ease;
+}
+.cs-collapsible-inner {
+  border-top: 1px solid var(--border);
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+/* ================================================================
+   BUTTONS
+   ================================================================ */
+.cs-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-md);
+  font-size: 0.825rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.cs-btn:active { transform: scale(0.98); }
+.cs-btn--primary {
+  background: var(--indigo);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: var(--shadow-btn);
+  letter-spacing: 0.02em;
+}
+.cs-btn--primary:hover {
+  background: var(--indigo-2);
+  box-shadow: 0 6px 28px rgba(99,102,241,0.5);
+}
+.cs-btn--primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.cs-btn--fraud {
+  background: rgba(239,68,68,0.1);
+  border-color: rgba(239,68,68,0.25);
+  color: var(--red-2);
+}
+.cs-btn--fraud:hover { background: rgba(239,68,68,0.18); }
+.cs-btn--legit {
+  background: rgba(16,185,129,0.1);
+  border-color: rgba(16,185,129,0.25);
+  color: var(--emerald-2);
+}
+.cs-btn--legit:hover { background: rgba(16,185,129,0.18); }
+.cs-btn--ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text-2);
+}
+.cs-btn--ghost:hover { background: rgba(255,255,255,0.04); color: var(--text-1); }
+.cs-btn--full { width: 100%; justify-content: center; padding: 0.9rem; font-size: 0.875rem; }
+
+.cs-sample-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+/* ================================================================
+   BADGE
+   ================================================================ */
+.cs-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 99px;
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(99,102,241,0.25);
+  color: var(--indigo-2);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+/* ================================================================
+   ERROR / SPINNER / VERDICT
+   ================================================================ */
+.cs-error-msg {
+  margin-top: 0.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid;
+  padding: 1rem;
+  font-size: 0.8rem;
+}
+.cs-error-msg--danger { border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.07); color: var(--red-2); }
+.cs-error-msg--warn { border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.07); color: var(--gold-2); }
+.cs-error-title { font-weight: 700; margin-bottom: 0.25rem; display: block; }
+.cs-error-sub { font-size: 11px; opacity: 0.8; margin-top: 0.25rem; }
+
+.cs-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  color: var(--text-2);
+  font-size: 0.8rem;
+}
+.cs-spinner-ring {
+  display: block;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(99,102,241,0.25);
+  border-top-color: var(--indigo-2);
+  animation: spin 0.75s linear infinite;
+}
+
+.cs-verdict {
+  margin-top: 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  animation: riseIn 0.45s cubic-bezier(.22,1,.36,1) both;
+}
+.cs-verdict--fraud { border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.07); }
+.cs-verdict--legit { border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.07); }
+.cs-verdict-icon { font-size: 2.5rem; line-height: 1; flex-shrink: 0; }
+.cs-verdict-body { flex: 1; }
+.cs-verdict-title { font-size: 1.05rem; font-weight: 700; }
+.cs-verdict-title--fraud { color: var(--red-2); }
+.cs-verdict-title--legit { color: var(--emerald-2); }
+.cs-verdict-sub { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.cs-verdict-prob { color: var(--text-2); font-weight: 600; }
+.cs-verdict-bar-bg {
+  margin-top: 0.75rem;
+  height: 4px;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+.cs-verdict-bar {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 1.2s cubic-bezier(.22,1,.36,1);
+}
+.cs-verdict-bar--fraud { background: var(--red); }
+.cs-verdict-bar--legit { background: var(--emerald); }
+.cs-verdict-pct {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  flex-shrink: 0;
+}
+.cs-verdict-pct--fraud { color: var(--red-2); }
+.cs-verdict-pct--legit { color: var(--emerald-2); }
+
+/* ================================================================
+   DROPZONE
+   ================================================================ */
+.cs-dropzone {
+  cursor: pointer;
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--border);
+  padding: 3.5rem 2rem;
+  text-align: center;
+  transition: var(--transition);
+  user-select: none;
+}
+.cs-dropzone:hover {
+  border-color: rgba(99,102,241,0.4);
+  background: rgba(99,102,241,0.03);
+}
+.cs-dropzone--active {
+  border-color: var(--indigo-2);
+  background: rgba(99,102,241,0.07);
+  transform: scale(1.01);
+}
+.cs-dropzone-icon { font-size: 3rem; margin-bottom: 0.75rem; }
+.cs-dropzone-title { font-weight: 600; color: var(--text-1); font-size: 0.9rem; }
+.cs-dropzone-sub { font-size: 11px; color: var(--text-3); margin-top: 0.4rem; }
+.cs-dropzone-meta {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 11px;
+}
+.cs-dropzone-size { color: var(--indigo-2); font-family: 'IBM Plex Mono', monospace; }
+.cs-dropzone-remove {
+  color: var(--text-3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  transition: color 0.2s;
+}
+.cs-dropzone-remove:hover { color: var(--red-2); }
+
+/* ================================================================
+   TABLES
+   ================================================================ */
+.cs-table { width: 100%; font-size: 12px; border-collapse: collapse; min-width: 420px; }
+.cs-th {
+  text-align: left;
+  padding-bottom: 0.5rem;
+  padding-right: 1.25rem;
+  color: var(--text-3);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.cs-th-ellipsis { color: var(--text-3); padding-bottom: 0.5rem; }
+.cs-tr { border-top: 1px solid var(--border); transition: background 0.15s; }
+.cs-tr:hover { background: rgba(255,255,255,0.02); }
+.cs-td { padding: 0.5rem 1.25rem 0.5rem 0; color: var(--text-2); white-space: nowrap; }
+.cs-td-ellipsis { color: var(--text-3); padding: 0.5rem 0; }
+.cs-td-mono { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--text-3); }
+.cs-td-bar { width: 8rem; }
+
+.cs-bar-bg { height: 4px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; }
+.cs-bar { height: 100%; border-radius: 99px; transition: width 0.8s ease; }
+.cs-bar--fraud { background: var(--red); }
+.cs-bar--legit { background: var(--emerald); }
+
+/* Tags */
+.cs-tag {
+  padding: 0.2rem 0.65rem;
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.cs-tag--fraud { background: rgba(239,68,68,0.12); color: var(--red-2); }
+.cs-tag--legit { background: rgba(16,185,129,0.12); color: var(--emerald-2); }
+
+/* ================================================================
+   BATCH SUMMARY
+   ================================================================ */
+.cs-summary-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: riseIn 0.45s cubic-bezier(.22,1,.36,1) both;
+}
+.cs-summary-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+.cs-summary-num { font-family: 'IBM Plex Mono', monospace; font-size: 1.75rem; font-weight: 700; }
+.cs-summary-val { color: var(--text-1); }
+.cs-summary-val--fraud { color: var(--red-2); }
+.cs-summary-val--legit { color: var(--emerald-2); }
+
+/* ================================================================
+   DASHBOARD
+   ================================================================ */
+.cs-info-bar {
+  padding: 0.875rem 1.1rem;
+  border-radius: var(--radius-md);
+  background: rgba(99,102,241,0.07);
+  border: 1px solid rgba(99,102,241,0.2);
+  color: var(--indigo-2);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.cs-metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.875rem; }
+
+.cs-metric-num { font-family: 'IBM Plex Mono', monospace; font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; }
+.cs-metric-val { color: var(--text-1); }
+.cs-metric-val--fraud { color: var(--red-2); }
+.cs-metric-val--legit { color: var(--emerald-2); }
+.cs-metric-val--auc { color: var(--indigo-2); }
+.cs-metric-sub { font-size: 10px; color: var(--text-3); margin-top: 0.25rem; }
+
+.cs-perf-list { display: flex; flex-direction: column; gap: 1.4rem; }
+.cs-perf-item {}
+.cs-perf-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.5rem; }
+.cs-perf-label { font-size: 0.875rem; font-weight: 600; color: var(--text-1); }
+.cs-perf-tip { font-size: 10px; color: var(--text-3); margin-top: 2px; max-width: 28ch; line-height: 1.4; }
+.cs-perf-pct { font-family: 'IBM Plex Mono', monospace; font-size: 1.15rem; font-weight: 700; color: var(--text-1); }
+.cs-perf-bar-bg { height: 6px; background: rgba(255,255,255,0.06); border-radius: 99px; overflow: hidden; }
+.cs-perf-bar {
+  height: 100%;
+  border-radius: 99px;
+  animation: expandBar 1s cubic-bezier(.22,1,.36,1) both;
+}
+.cs-perf-bar--indigo  { background: linear-gradient(90deg, var(--indigo), var(--indigo-2)); }
+.cs-perf-bar--emerald { background: linear-gradient(90deg, var(--emerald), var(--emerald-2)); }
+.cs-perf-bar--violet  { background: linear-gradient(90deg, var(--violet), #a78bfa); }
+.cs-perf-bar--sky     { background: linear-gradient(90deg, var(--sky), #38bdf8); }
+
+/* Distribution */
+.cs-dist-bar {
+  height: 2.5rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: rgba(255,255,255,0.04);
+  display: flex;
+}
+.cs-dist-legit {
+  height: 100%;
+  background: rgba(16,185,129,0.5);
+  display: flex;
+  align-items: center;
+  transition: width 1s ease;
+}
+.cs-dist-fraud {
+  height: 100%;
+  background: rgba(239,68,68,0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cs-dist-label { font-size: 10px; font-weight: 700; padding: 0 0.75rem; color: rgba(255,255,255,0.9); white-space: nowrap; overflow: hidden; }
+.cs-dist-legend { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.75rem; font-size: 11px; color: var(--text-3); }
+.cs-dist-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.cs-dist-dot--legit { background: var(--emerald); }
+.cs-dist-dot--fraud { background: var(--red); }
+
+/* ================================================================
+   FOOTER
+   ================================================================ */
+.cs-footer {
+  max-width: 780px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-3);
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* ================================================================
+   ANIMATIONS
+   ================================================================ */
 @keyframes riseIn {
   from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0);    }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes expandBar {
   from { width: 0; }
 }
 
-@keyframes shieldPulse {
-  0%, 100% { opacity: 0.7; transform: scale(1);    }
-  50%      { opacity: 1.0; transform: scale(1.06); }
-}
-
-@keyframes scanline {
-  from { transform: translateY(-100%); }
-  to   { transform: translateY(400%);  }
-}
-
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
-/* ── Utility: tab active glow ────────────────────────────────── */
-.tab-active-glow {
-  box-shadow:
-    0 0 20px rgba(59, 130, 246, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-}
-
-/* ── Utility: glass card ─────────────────────────────────────── */
-.glass-card {
-  background: rgba(11, 17, 32, 0.80);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid #1e2d4a;
-  border-radius: 1rem;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.60);
-}
-
-/* ── Utility: gradient text ──────────────────────────────────── */
-.gradient-text {
-  background: linear-gradient(135deg, #60a5fa 0%, #818cf8 50%, #38bdf8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* ── Utility: animate on mount ───────────────────────────────── */
-.rise-in {
-  animation: riseIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-/* ── Code / mono elements ────────────────────────────────────── */
-code {
-  font-family: 'Space Mono', ui-monospace, monospace;
-  font-size: 0.85em;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 0.1em 0.45em;
-  border-radius: 4px;
-  color: #7a9cc5;
+/* ================================================================
+   RESPONSIVE
+   ================================================================ */
+@media (max-width: 600px) {
+  .cs-hero-stats { grid-template-columns: repeat(2, 1fr); }
+  .cs-wordmark { font-size: 2.5rem; }
+  .cs-tabs { gap: 0.35rem; }
+  .cs-tab { padding: 0.65rem 0.75rem; }
+  .cs-tab-label { font-size: 0.75rem; }
+  .cs-tab-sub { display: none; }
+  .cs-metrics-grid { grid-template-columns: 1fr; }
+  .cs-summary-grid { grid-template-columns: 1fr; }
 }
