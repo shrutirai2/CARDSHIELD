@@ -1,0 +1,15 @@
+# Python virtual environment - don't upload
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+
+# Dataset is too large for GitHub (100MB limit)
+backend/data/creditcard.csv
+
+# React build junk
+frontend/node_modules/
+frontend/build/
+
+# OS files
+.DS_Store
+Thumbs.db
