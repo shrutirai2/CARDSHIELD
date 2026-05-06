@@ -8,7 +8,7 @@ import { useState, useRef, useCallback } from "react";
 import Papa from "papaparse";
 
 // ── Config ───────────────────────────────────────────────────────
-const API_BASE = "http://localhost:5000";
+const API_BASE = "https://cardshield-backend.onrender.com";
 
 // Feature columns in exact training order: Time, V1–V28, Amount
 const V_FIELDS    = Array.from({ length: 28 }, (_, i) => `V${i + 1}`);
