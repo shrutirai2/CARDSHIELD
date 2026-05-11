@@ -27,6 +27,7 @@ A Full-Stack Machine Learning Web Application to detect fraudulent credit card t
 ## 📂 Project Structure
 
 CardShield/
+
 ├── backend/
 
 │   ├── app.py
@@ -41,6 +42,7 @@ CardShield/
 
 │       └── creditcard.csv
 │
+
 └── frontend/
 
     ├── src/
