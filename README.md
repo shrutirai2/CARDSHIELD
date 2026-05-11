@@ -42,6 +42,8 @@ CardShield/
     ├── package.json
     └── tailwind.config.js
 
+
+
 ## How to Run Locally
 
 ### Backend
@@ -53,7 +55,7 @@ pip install -r requirements.txt
 python train_model.py
 python app.py
 
-Frontendbash
+Frontend
 
 cd frontend
 npm install
