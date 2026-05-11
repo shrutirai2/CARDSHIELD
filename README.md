@@ -28,18 +28,29 @@ A Full-Stack Machine Learning Web Application to detect fraudulent credit card t
 
 CardShield/
 ├── backend/
+
 │   ├── app.py
+
 │   ├── train_model.py
+
 │   ├── model.pkl
+
 │   ├── requirements.txt
+
 │   └── data/
+
 │       └── creditcard.csv
 │
 └── frontend/
+
     ├── src/
+    
     │   ├── App.js
+    
     │   └── index.css
+    
     ├── package.json
+    
     └── tailwind.config.js
 
 
