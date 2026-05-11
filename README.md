@@ -5,8 +5,8 @@ A Full-Stack Machine Learning Web Application to detect fraudulent credit card t
 
 ## 🚀 Live Demo
 
-- **Frontend**: [CardShield Frontend](https://your-frontend.onrender.com)  
-- **Backend API**: [CardShield Backend](https://your-backend.onrender.com)
+- **Frontend**: [CardShield Frontend](https://cardshield-frontend.onrender.com)  
+- **Backend API**: [CardShield Backend](https://cardshield.onrender.com)
 
 ## ✨ Key Features
 
